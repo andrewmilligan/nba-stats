@@ -1,7 +1,8 @@
+/* eslint-disable import/prefer-default-export */
 import fetchDailyScoreboard from './utils/fetch/fetchDailyScoreboard';
 import queueMessages from './utils/aws/queueMessages';
 
-const scheduleTasks = async function scheduleTasks() {
+export const scheduleTasks = async function scheduleTasks() {
   const scoreboard = await fetchDailyScoreboard();
   if (!scoreboard) return;
 
@@ -44,5 +45,3 @@ const scheduleTasks = async function scheduleTasks() {
     messages: batches.flat(),
   });
 };
-
-export default scheduleTasks;

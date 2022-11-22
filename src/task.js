@@ -1,7 +1,8 @@
+/* eslint-disable import/prefer-default-export */
 import updateGame from './updateGame';
 import updateDailyScoreboard from './updateDailyScoreboard';
 
-const task = async function task(opts = {}) {
+export const task = async function task(opts = {}) {
   const {
     task: taskType,
     ...taskOpts
@@ -13,6 +14,6 @@ const task = async function task(opts = {}) {
     const { gameId } = taskOpts;
     await updateGame(gameId);
   }
-};
 
-export default task;
+  return opts;
+};
