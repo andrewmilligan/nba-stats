@@ -1,0 +1,9 @@
+{
+  "root": true,
+  "extends": [
+    "@politico/eslint-config-interactives"
+  ],
+  "parserOptions": {
+    "ecmaVersion": 2020
+  }
+}
