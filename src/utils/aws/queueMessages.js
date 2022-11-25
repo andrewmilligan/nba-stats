@@ -1,5 +1,6 @@
 import { SQSClient, SendMessageBatchCommand } from '@aws-sdk/client-sqs';
 import { v4 as uuidv4 } from 'uuid';
+import log from '../log';
 
 const {
   AWS_SQS_URL,
@@ -34,13 +35,17 @@ const queueMessages = async function queueMessages(opts = {}) {
 
     const start = i * batchSize;
     const end = start + batchSize;
-    const command = new SendMessageBatchCommand({
+    const input = {
       Entries: entries.slice(start, end),
       QueueUrl: AWS_SQS_URL,
-    });
+    };
+    log(`Dispatching a batch of ${input.Entries.length} messages to SQS at ${input.QueueUrl}`);
+    log(JSON.stringify(input, null, 2));
+    const command = new SendMessageBatchCommand(input);
 
-    await sqs.send(command);
-  });
+    const rsp = await sqs.send(command);
+    log(rsp);
+  }, Promise.resolve());
 };
 
 export default queueMessages;

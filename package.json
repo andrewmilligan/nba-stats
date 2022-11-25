@@ -10,7 +10,8 @@
     "backfill-games": "node -r esm -r dotenv/config bin/backfillGames.js",
     "update-schedule": "node -r esm -r dotenv/config bin/updateSchedule.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "rollup -c --bundleConfigAsCjs"
+    "build": "rollup -c --bundleConfigAsCjs",
+    "shell": "node"
   },
   "keywords": [],
   "author": "",
@@ -19,6 +20,7 @@
     "@aws-sdk/client-cloudfront": "^3.212.0",
     "@aws-sdk/client-s3": "^3.212.0",
     "@aws-sdk/client-sqs": "^3.215.0",
+    "@peculiar/webcrypto": "^1.4.1",
     "esm": "^3.2.25",
     "inquirer": "^8.2.0",
     "isomorphic-unfetch": "^3.1.0",
@@ -26,12 +28,14 @@
   },
   "devDependencies": {
     "@politico/eslint-config-interactives": "^1.0.2",
+    "@rollup/plugin-alias": "^4.0.2",
     "@rollup/plugin-commonjs": "^23.0.2",
     "@rollup/plugin-json": "^5.0.1",
     "@rollup/plugin-node-resolve": "^15.0.1",
     "dotenv": "^16.0.3",
     "eslint": "^7.32.0",
     "rollup": "^3.4.0",
+    "rollup-plugin-node-externals": "^5.0.2",
     "serverless": "^3.25.0"
   }
 }

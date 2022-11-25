@@ -1,6 +1,6 @@
 import fetch from 'isomorphic-unfetch';
 
-import fetchSchedule from '../src/utils/fetch/fetchSchedule';
+import updateSchedule from '../src/updateSchedule';
 import updateGame from '../src/updateGame';
 import upload from '../src/utils/aws/upload';
 import loadedTeams from '../teams.json';
@@ -8,7 +8,7 @@ import loadedPlayers from '../players.json';
 
 const main = async () => {
   console.log('Fetching NBA schedule');
-  const schedule = await fetchSchedule();
+  const schedule = await updateSchedule();
   const allGames = schedule.gameDates
     .map(({ games }) => games)
     .flat()

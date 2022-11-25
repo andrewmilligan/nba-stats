@@ -1,5 +1,6 @@
 import { S3Client, PutObjectCommand } from '@aws-sdk/client-s3';
 
+import log from '../log';
 import purge from './purge';
 
 const {
@@ -17,13 +18,15 @@ const upload = async function upload(opts = {}) {
   } = opts;
 
   const client = new S3Client({ region: AWS_REGION });
-  const command = new PutObjectCommand({
+  const config = {
     Bucket: AWS_S3_BUCKET,
     Key: key,
     CacheControl: cacheControl,
     ContentType: contentType,
     Body: content,
-  });
+  };
+  log(`Uploading object to s3://${config.Bucket}/${config.Key}`);
+  const command = new PutObjectCommand(config);
   const rsp = await client.send(command);
 
   if (clearCache) {

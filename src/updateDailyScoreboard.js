@@ -1,10 +1,12 @@
 import fetchDailyScoreboard from './utils/fetch/fetchDailyScoreboard';
 import upload from './utils/aws/upload';
+import log from './utils/log';
 
 const updateDailyScoreboard = async function updateDailyScoreboard() {
   const scoreboard = await fetchDailyScoreboard();
   if (scoreboard) {
-    const { gameDate } = scoreboard;
+    const { gameDate, games } = scoreboard;
+    log(`Loaded scoreboard for ${gameDate} with ${games.length} games`);
     const content = JSON.stringify(scoreboard);
     await Promise.all([
       upload({
@@ -16,6 +18,8 @@ const updateDailyScoreboard = async function updateDailyScoreboard() {
         content,
       }),
     ]);
+  } else {
+    log('Failed to load scoreboard');
   }
   return scoreboard;
 };

@@ -11,6 +11,7 @@ const plugins = [
 ];
 
 const output = {
+  dir: 'deployment/dist',
   format: 'cjs',
   sourcemap: false,
   preserveModules: false,
@@ -19,22 +20,12 @@ const output = {
 export default [
   {
     input: 'src/task.js',
-    output: [
-      {
-        file: 'handler_task.js',
-        ...output,
-      },
-    ],
+    output,
     plugins,
   },
   {
     input: 'src/scheduleTasks.js',
-    output: [
-      {
-        file: 'handler_scheduleTasks.js',
-        ...output,
-      },
-    ],
+    output,
     plugins,
   },
 ];
