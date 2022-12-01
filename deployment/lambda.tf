@@ -48,6 +48,8 @@ resource "aws_lambda_function" "schedule_lambda" {
       AWS_SQS_BATCH_SIZE = "10"
       SCHEDULE_RATE_MINUTES = "10"
       SCHEDULE_INTERVAL_SECONDS = "10"
+      AWS_CLOUDFRONT_DISTRIBUTION = "E33WH3YYF53YOA"
+      AWS_S3_BUCKET = "basketball-stats-data"
     }
   }
 }
