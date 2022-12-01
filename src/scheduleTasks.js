@@ -1,6 +1,6 @@
 /* eslint-disable import/prefer-default-export */
 import crypto from './utils/crypto';
-import fetchDailyScoreboard from './utils/fetch/fetchDailyScoreboard';
+import updateDailyScoreboard from './updateDailyScoreboard';
 import queueMessages from './utils/aws/queueMessages';
 import log from './utils/log';
 import {
@@ -17,7 +17,7 @@ export { crypto };
 
 export const scheduleTasks = async function scheduleTasks() {
   const now = new Date();
-  const scoreboard = await fetchDailyScoreboard();
+  const scoreboard = await updateDailyScoreboard();
   if (!scoreboard) {
     log('Failed to load daily scoreboard');
     return {

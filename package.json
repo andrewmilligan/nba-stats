@@ -8,7 +8,9 @@
     "watch-game": "node -r esm bin/watchGame.js",
     "poll-games": "node -r esm -r dotenv/config bin/pollGames.js",
     "backfill-games": "node -r esm -r dotenv/config bin/backfillGames.js",
+    "season-stats": "node -r esm -r dotenv/config bin/teamSeasonStats.js",
     "update-schedule": "node -r esm -r dotenv/config bin/updateSchedule.js",
+    "update-game": "node -r esm -r dotenv/config bin/updateGame.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "rollup -c --bundleConfigAsCjs",
     "shell": "node"
@@ -36,6 +38,7 @@
     "eslint": "^7.32.0",
     "rollup": "^3.4.0",
     "rollup-plugin-node-externals": "^5.0.2",
-    "serverless": "^3.25.0"
+    "serverless": "^3.25.0",
+    "yargs": "^17.6.2"
   }
 }
