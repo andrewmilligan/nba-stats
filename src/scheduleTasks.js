@@ -17,7 +17,7 @@ export { crypto };
 
 export const scheduleTasks = async function scheduleTasks() {
   const now = new Date();
-  const scoreboard = await updateDailyScoreboard();
+  const scoreboard = await updateDailyScoreboard({ isLive: false });
   if (!scoreboard) {
     log('Failed to load daily scoreboard');
     return {

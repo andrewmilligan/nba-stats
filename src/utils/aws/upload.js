@@ -1,6 +1,7 @@
 import { S3Client, PutObjectCommand } from '@aws-sdk/client-s3';
 
 import log from '../log';
+import getCacheControl from '../cache/cacheControl';
 import purge from './purge';
 
 const {
@@ -12,7 +13,7 @@ const upload = async function upload(opts = {}) {
   const {
     key,
     content,
-    cacheControl = 'max-age=5',
+    cacheControl = getCacheControl(10),
     contentType = 'application/json',
     purge: clearCache = false,
   } = opts;

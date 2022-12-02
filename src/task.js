@@ -27,7 +27,7 @@ export const task = async function task(opts = {}) {
 
     try {
       if (taskType === UPDATE_DAILY_SCOREBOARD) {
-        await updateDailyScoreboard();
+        await updateDailyScoreboard({ isLive: true });
       } else if (taskType === UPDATE_GAME) {
         const { gameId } = taskOpts;
         await updateGame(gameId);
