@@ -67,11 +67,13 @@ export const scheduleTasks = async function scheduleTasks() {
     })),
   ];
 
-  // Update every INTERVAL seconds over the next RATE minutes
-  const numUpdates = scheduleRateMs / scheduleIntervalMs;
+  // Update every INTERVAL seconds over the next RATE minutes. Offset by
+  // INTERVAL seconds so that this batch of tasks ends as close as possible to
+  // when the next batch is scheduled.
+  const numUpdates = Math.floor(scheduleRateMs / scheduleIntervalMs);
   const batches = [...Array(numUpdates)].map((_, i) => (
     messageBodies.map((body) => ({
-      delay: i * (scheduleIntervalMs / 1000), // delay in seconds
+      delay: (i + 1) * (scheduleIntervalMs / 1000), // delay in seconds
       body,
     }))
   ));
