@@ -15,13 +15,26 @@ export const task = async function task(opts = {}) {
     Records: records = [],
   } = opts;
 
-  await records.reduce(async (promise, record) => {
-    await promise;
+  // Parse array of actions out of message bodies
+  const actions = records.reduce((recordActions, record) => {
+    const body = JSON.parse(record.body || '[]');
+    const bodyActions = [body].flat();
+    return [...recordActions, ...bodyActions];
+  }, []);
 
+  // Split array of actions into batches
+  const batchSize = 5;
+  const numBatches = Math.ceil(actions.length / batchSize);
+  const batches = [...Array(numBatches)].map((_, i) => (
+    actions.slice(i * batchSize, (i + 1) * batchSize)
+  ));
+
+  // Handler function to execute a single task
+  const handleTask = async (action) => {
     const {
       task: taskType,
       ...taskOpts
-    } = JSON.parse(record.body || '{}');
+    } = action;
 
     log(`Handling task ${taskType} with options ${JSON.stringify(taskOpts)}`);
 
@@ -36,6 +49,12 @@ export const task = async function task(opts = {}) {
       log('Failed to handle task');
       log(error);
     }
+  };
+
+  // Iterate through batches and handle all actions in each batch in parallel
+  await batches.reduce(async (promise, batch) => {
+    await promise;
+    await Promise.all(batch.map(handleTask));
   }, Promise.resolve());
 
   return opts;

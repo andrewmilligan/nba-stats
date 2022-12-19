@@ -10,7 +10,7 @@ import {
 
 const {
   SCHEDULE_RATE_MINUTES = '10',
-  SCHEDULE_INTERVAL_SECONDS = '10',
+  SCHEDULE_INTERVAL_SECONDS = '15',
 } = process.env;
 
 export { crypto };
@@ -71,15 +71,11 @@ export const scheduleTasks = async function scheduleTasks() {
   // INTERVAL seconds so that this batch of tasks ends as close as possible to
   // when the next batch is scheduled.
   const numUpdates = Math.floor(scheduleRateMs / scheduleIntervalMs);
-  const batches = [...Array(numUpdates)].map((_, i) => (
-    messageBodies.map((body) => ({
-      delay: (i + 1) * (scheduleIntervalMs / 1000), // delay in seconds
-      body,
-    }))
-  ));
-  const messages = batches.flat();
+  const messages = [...Array(numUpdates)].map((_, i) => ({
+    delay: (i + 1) * (scheduleIntervalMs / 1000), // delay in seconds
+    body: messageBodies,
+  }));
   log(`Dispatching ${messages.length} messages to SQS`);
-  log(batches);
 
   await queueMessages({
     messages,
