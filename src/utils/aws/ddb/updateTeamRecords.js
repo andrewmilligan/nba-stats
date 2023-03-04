@@ -85,7 +85,7 @@ const updateTeamRecords = async function updateTeamRecords({
 
   const dataIfUpdated = Object.entries(data)
     .reduce(({ records, isUpdated }, [teamId, record]) => {
-      const recordUpdate = teamUpdates.get(teamId);
+      const recordUpdate = teamUpdates.get(+teamId);
       const newRecord = recordUpdate || record;
       records.push([teamId, newRecord]);
       return {
