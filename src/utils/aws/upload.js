@@ -6,6 +6,7 @@ import purge from './purge';
 
 const {
   AWS_S3_BUCKET,
+  AWS_S3_PREFIX,
   AWS_REGION = 'us-east-1',
 } = process.env;
 
@@ -19,9 +20,10 @@ const upload = async function upload(opts = {}) {
   } = opts;
 
   const client = new S3Client({ region: AWS_REGION });
+  const fullKey = AWS_S3_PREFIX ? `${AWS_S3_PREFIX}/${key}` : key;
   const config = {
     Bucket: AWS_S3_BUCKET,
-    Key: key,
+    Key: fullKey,
     CacheControl: cacheControl,
     ContentType: contentType,
     Body: content,

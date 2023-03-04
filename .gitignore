@@ -145,3 +145,5 @@ dist
 
 /handler_*
 /deployment/.terraform
+
+/dev/data

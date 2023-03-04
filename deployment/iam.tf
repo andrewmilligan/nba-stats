@@ -57,6 +57,23 @@ data "aws_iam_policy_document" "basketball_stats_lambda" {
   }
 
   statement {
+    sid       = "AllowDynamoDBPermissions"
+    effect    = "Allow"
+    resources = [
+      "arn:aws:dynamodb:us-east-1:909150888982:table/BASKETBALL_STATS",
+    ]
+
+    actions = [
+      "dynamodb:BatchGetItem",
+      "dynamodb:GetItem",
+      "dynamodb:Query",
+      "dynamodb:BatchWriteItem",
+      "dynamodb:PutItem",
+      "dynamodb:UpdateItem"
+    ]
+  }
+
+  statement {
     sid       = "AllowInvokingLambdas"
     effect    = "Allow"
     resources = [
