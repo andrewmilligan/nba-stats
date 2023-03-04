@@ -7,6 +7,7 @@ aws \
   --profile personal \
   dynamodb \
   create-table \
+  --region us-east-1 \
   --table-name "$AWS_DYNAMODB_TABLE_NAME" \
   --billing-mode "PAY_PER_REQUEST" \
   --attribute-definitions \
