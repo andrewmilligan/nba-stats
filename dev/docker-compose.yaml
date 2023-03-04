@@ -1,0 +1,12 @@
+version: '3.7'
+services:
+  dynamodb:
+    image:  amazon/dynamodb-local
+    container_name: nba-stats-dynamodb
+    hostname: dynamodb
+    restart: always
+    volumes:
+      -  ./data/dynamodb:/home/dynamodblocal/data
+    ports:
+      - 8765:8765
+    command: "-jar DynamoDBLocal.jar -sharedDb -dbPath /home/dynamodblocal/data/ -port 8765"
