@@ -26,6 +26,7 @@ resource "aws_lambda_function" "task_lambda" {
     variables = {
       AWS_CLOUDFRONT_DISTRIBUTION = "E33WH3YYF53YOA"
       AWS_S3_BUCKET = "basketball-stats-data"
+      AWS_DYNAMODB_TABLE_NAME = "BASKETBALL_STATS"
     }
   }
 }
@@ -50,6 +51,7 @@ resource "aws_lambda_function" "schedule_lambda" {
       SCHEDULE_INTERVAL_SECONDS = "15"
       AWS_CLOUDFRONT_DISTRIBUTION = "E33WH3YYF53YOA"
       AWS_S3_BUCKET = "basketball-stats-data"
+      AWS_DYNAMODB_TABLE_NAME = "BASKETBALL_STATS"
     }
   }
 }
