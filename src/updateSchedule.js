@@ -8,6 +8,8 @@ const updateSchedule = async function updateSchedule() {
   if (!schedule) return schedule;
 
   const scheduleCacheControl = cacheControl(TEN_MINUTES);
+  const now = new Date();
+  const day = 1000 * 60 * 60 * 24; // 24h
 
   // upload full schedule
   await upload({
@@ -30,6 +32,12 @@ const updateSchedule = async function updateSchedule() {
   // upload individual daily schedules
   await schedule.gameDates.reduce(async (promise, date) => {
     await promise;
+
+    const d = new Date(date.gameDate);
+    if (d < now && (now - d) > day) {
+      return;
+    }
+
     await upload({
       key: `stats/global/daily-schedule/${date.gameDate}.json`,
       content: JSON.stringify(date),
