@@ -1,10 +1,16 @@
+import { leagues } from '../leagues';
 import fetchJson from './fetchJson';
 
 /**
  * Fetch today's league scoreboard.
  */
-const fetchDailyScoreboard = async function fetchDailyScoreboard() {
-  const url = 'https://cdn.nba.com/static/json/liveData/scoreboard/todaysScoreboard_00.json';
+const fetchDailyScoreboard = async function fetchDailyScoreboard(opts = {}) {
+  const {
+    league = 'nba',
+  } = opts;
+
+  const leagueId = leagues[league].id;
+  const url = `https://cdn.${league}.com/static/json/liveData/scoreboard/todaysScoreboard_${leagueId}.json`;
   const data = await fetchJson(url);
   if (!data) {
     return undefined;

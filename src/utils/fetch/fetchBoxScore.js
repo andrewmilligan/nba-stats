@@ -6,8 +6,8 @@ import fetchNbaLiveStat from './fetchNbaLiveStat';
  * @param {string} gameId
  *        NBA game ID
  */
-const fetchBoxScore = async function fetchBoxScore(gameId) {
-  const data = await fetchNbaLiveStat('boxscore', gameId);
+const fetchBoxScore = async function fetchBoxScore(gameId, opts) {
+  const data = await fetchNbaLiveStat('boxscore', gameId, opts);
   const { game = {} } = data || {};
   return game;
 };

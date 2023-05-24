@@ -4,10 +4,11 @@ import { TEAM_RECORDS, CURRENT_SEASON } from './keys';
 
 const updateTeamRecords = async function updateTeamRecords({
   teams = [],
+  league = 'nba',
 }) {
   // document key to update
   const key = {
-    PrimaryKey: TEAM_RECORDS,
+    PrimaryKey: `${TEAM_RECORDS}:${league}`,
     SortKey: CURRENT_SEASON,
   };
 

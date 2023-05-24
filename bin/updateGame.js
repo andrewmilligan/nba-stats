@@ -1,18 +1,22 @@
 /* eslint-disable import/no-extraneous-dependencies, no-console */
 import updateGame from '../src/updateGame';
 
-const { gameId } = require('yargs')
+const { gameId, league } = require('yargs')
   .options({
     gameId: {
       alias: 'g',
       type: 'string',
+    },
+    league: {
+      type: 'string',
+      default: 'nba',
     },
   })
   .argv;
 
 const main = async () => {
   console.log(`Updating game [${gameId}]`);
-  await updateGame(gameId);
+  await updateGame(gameId, { league });
 };
 
 if (!gameId) {

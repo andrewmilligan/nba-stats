@@ -3,8 +3,12 @@ import upload from './utils/aws/upload';
 import { TEN_MINUTES } from './utils/cache/ages';
 import cacheControl from './utils/cache/cacheControl';
 
-const updateSchedule = async function updateSchedule() {
-  const schedule = await fetchSchedule();
+const updateSchedule = async function updateSchedule(opts = {}) {
+  const {
+    league = 'nba',
+  } = opts;
+
+  const schedule = await fetchSchedule({ league });
   if (!schedule) return schedule;
 
   const scheduleCacheControl = cacheControl(TEN_MINUTES);
@@ -13,7 +17,7 @@ const updateSchedule = async function updateSchedule() {
 
   // upload full schedule
   await upload({
-    key: 'stats/global/schedule.json',
+    key: `stats/${league}/global/schedule.json`,
     content: JSON.stringify(schedule),
     cacheControl: scheduleCacheControl,
   });
@@ -24,22 +28,24 @@ const updateSchedule = async function updateSchedule() {
     gameDates: schedule.gameDates.map(({ gameDate }) => gameDate),
   };
   await upload({
-    key: 'stats/global/dates.json',
+    key: `stats/${league}/global/dates.json`,
     content: JSON.stringify(dates),
     cacheControl: scheduleCacheControl,
   });
 
   // upload individual daily schedules
-  await schedule.gameDates.reduce(async (promise, date) => {
-    await promise;
-
+  await schedule.gameDates.reduce(async (promise, date, i) => {
     const d = new Date(date.gameDate);
     if (d < now && (now - d) > day) {
       return;
     }
 
+    if (i % 10 === 0) {
+      await promise;
+    }
+
     await upload({
-      key: `stats/global/daily-schedule/${date.gameDate}.json`,
+      key: `stats/${league}/global/daily-schedule/${date.gameDate}.json`,
       content: JSON.stringify(date),
       cacheControl: scheduleCacheControl,
     });

@@ -7,6 +7,7 @@ import updateTeamRecords from './utils/aws/ddb/updateTeamRecords';
 
 const updateDailyScoreboard = async function updateDailyScoreboard(opts = {}) {
   const {
+    league = 'nba',
     isLive = false,
   } = opts;
 
@@ -15,10 +16,11 @@ const updateDailyScoreboard = async function updateDailyScoreboard(opts = {}) {
     ? cacheControl(TEN_SECONDS)
     : cacheControl(FIVE_MINUTES);
 
-  const scoreboard = await fetchDailyScoreboard();
+  const scoreboard = await fetchDailyScoreboard({ league });
   if (scoreboard) {
     const { gameDate, games } = scoreboard;
-    log(`Loaded scoreboard for ${gameDate} with ${games.length} games`);
+    const leagueName = league.toUpperCase();
+    log(`Loaded ${leagueName} scoreboard for ${gameDate} with ${games.length} games`);
 
     const teamRecords = games.reduce((records, game) => {
       records.push({
@@ -36,29 +38,30 @@ const updateDailyScoreboard = async function updateDailyScoreboard(opts = {}) {
 
     const content = JSON.stringify(scoreboard);
     const updateValues = await Promise.allSettled([
+      updateTeamRecords({
+        teams: teamRecords,
+        league,
+      }),
       upload({
-        key: 'stats/global/scoreboard.json',
+        key: `stats/${league}/global/scoreboard.json`,
         content,
         cacheControl: scoreboardCacheControl,
       }),
       upload({
-        key: `stats/global/daily-schedule/${gameDate}.json`,
+        key: `stats/${league}/global/daily-schedule/${gameDate}.json`,
         content,
         cacheControl: scheduleCacheControl,
       }),
-      updateTeamRecords({
-        teams: teamRecords,
-      }),
     ]);
 
-    const teamRecordsUpdate = updateValues[2];
+    const teamRecordsUpdate = updateValues[0];
     if (
       teamRecordsUpdate.status === 'fulfilled'
       && teamRecordsUpdate.value
     ) {
       const recordContent = JSON.stringify(teamRecordsUpdate.value);
       await upload({
-        key: 'stats/global/records.json',
+        key: `stats/${league}/global/records.json`,
         content: recordContent,
         cacheControl: cacheControl(FIVE_MINUTES),
       });

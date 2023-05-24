@@ -3,8 +3,12 @@ import fetchJson from './fetchJson';
 /**
  * Fetch the season schedule.
  */
-const fetchSchedule = async function fetchSchedule() {
-  const url = 'https://cdn.nba.com/static/json/staticData/scheduleLeagueV2_1.json';
+const fetchSchedule = async function fetchSchedule(opts = {}) {
+  const {
+    league = 'nba',
+  } = opts;
+
+  const url = `https://cdn.${league}.com/static/json/staticData/scheduleLeagueV2_1.json`;
   const data = await fetchJson(url);
   if (!data) {
     return undefined;

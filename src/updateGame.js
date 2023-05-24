@@ -10,10 +10,14 @@ import cacheControl from './utils/cache/cacheControl';
  * @param {string} gameId
  *        NBA game ID
  */
-const updateGame = async function updateGame(gameId) {
+const updateGame = async function updateGame(gameId, opts = {}) {
+  const {
+    league = 'nba',
+  } = opts;
+
   const [boxScore, playByPlay] = await Promise.all([
-    fetchBoxScore(gameId),
-    fetchPlayByPlay(gameId),
+    fetchBoxScore(gameId, { league }),
+    fetchPlayByPlay(gameId, { league }),
   ]);
 
   const msToGame = new Date(boxScore.gameTimeUTC) - new Date();
@@ -27,14 +31,14 @@ const updateGame = async function updateGame(gameId) {
   await Promise.all([
     // upload box score
     upload({
-      key: `stats/game/${gameId}/boxscore.json`,
+      key: `stats/${league}/game/${gameId}/boxscore.json`,
       content: JSON.stringify(boxScore),
       cacheControl: gameCacheControl,
     }),
 
     // upload play-by-play
     upload({
-      key: `stats/game/${gameId}/playbyplay.json`,
+      key: `stats/${league}/game/${gameId}/playbyplay.json`,
       content: JSON.stringify(playByPlay),
       cacheControl: gameCacheControl,
     }),

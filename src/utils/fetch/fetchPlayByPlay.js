@@ -6,8 +6,8 @@ import fetchNbaLiveStat from './fetchNbaLiveStat';
  * @param {string} gameId
  *        NBA game ID
  */
-const fetchPlayByPlay = async function fetchPlayByPlay(gameId) {
-  const data = await fetchNbaLiveStat('playbyplay', gameId);
+const fetchPlayByPlay = async function fetchPlayByPlay(gameId, opts) {
+  const data = await fetchNbaLiveStat('playbyplay', gameId, opts);
   const { game = {} } = data || {};
   const { actions = [] } = game;
   return actions;

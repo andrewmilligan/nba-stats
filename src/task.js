@@ -2,8 +2,10 @@
 import crypto from './utils/crypto';
 import updateGame from './updateGame';
 import updateDailyScoreboard from './updateDailyScoreboard';
+import updateSchedule from './updateSchedule';
 import log from './utils/log';
 import {
+  UPDATE_SCHEDULE,
   UPDATE_DAILY_SCOREBOARD,
   UPDATE_GAME,
 } from './utils/tasks/types';
@@ -33,6 +35,7 @@ export const task = async function task(opts = {}) {
   const handleTask = async (action) => {
     const {
       task: taskType,
+      league = 'nba',
       ...taskOpts
     } = action;
 
@@ -40,10 +43,15 @@ export const task = async function task(opts = {}) {
 
     try {
       if (taskType === UPDATE_DAILY_SCOREBOARD) {
-        await updateDailyScoreboard({ isLive: true });
+        await updateDailyScoreboard({
+          isLive: true,
+          league,
+        });
       } else if (taskType === UPDATE_GAME) {
         const { gameId } = taskOpts;
-        await updateGame(gameId);
+        await updateGame(gameId, { league });
+      } else if (taskType === UPDATE_SCHEDULE) {
+        await updateSchedule({ league });
       }
     } catch (error) {
       log('Failed to handle task');
