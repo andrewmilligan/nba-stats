@@ -69,6 +69,9 @@ async function main() {
     await Promise.all(['L', 'D'].map(async (type) => {
       const url = `https://cdn.${league}.com/logos/${league}/${id}/primary/${type}/logo.svg`;
       const img = await unfetch(url);
+      if (!img.status !== 200) {
+        return;
+      }
       const content = await img.arrayBuffer();
       await upload({
         key: `images/${league}/teams/logos/primary/${type}/${id}.svg`,
@@ -87,6 +90,9 @@ async function main() {
     }
     const url = `https://cdn.${league}.com/headshots/${league}/latest/260x190/${id}.png`;
     const img = await unfetch(url);
+    if (!img.status !== 200) {
+      return;
+    }
     const content = await img.arrayBuffer();
     await upload({
       key: `images/${league}/players/headshots/latest/small/${id}.png`,
