@@ -1,4 +1,4 @@
-import fetchJson from './fetchJson';
+import fetchNbaJson from './fetchNbaJson';
 
 /**
  * Fetch a live NBA stat for a specific game.
@@ -17,7 +17,7 @@ const fetchNbaLiveStat = async function fetchNbaLiveStat(
 
   const name = `${stat}_${gameId}.json`;
   const url = `https://cdn.${league}.com/static/json/liveData/${stat}/${name}`;
-  const data = await fetchJson(url);
+  const data = await fetchNbaJson(url);
   return data;
 };
 

@@ -1,5 +1,5 @@
 import { leagues } from '../leagues';
-import fetchJson from './fetchJson';
+import fetchNbaJson from './fetchNbaJson';
 
 /**
  * Fetch today's league scoreboard.
@@ -11,7 +11,7 @@ const fetchDailyScoreboard = async function fetchDailyScoreboard(opts = {}) {
 
   const leagueId = leagues[league].id;
   const url = `https://cdn.${league}.com/static/json/liveData/scoreboard/todaysScoreboard_${leagueId}.json`;
-  const data = await fetchJson(url);
+  const data = await fetchNbaJson(url);
   if (!data) {
     return undefined;
   }

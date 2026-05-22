@@ -1,4 +1,4 @@
-import fetchJson from './fetchJson';
+import fetchNbaJson from './fetchNbaJson';
 
 /**
  * Fetch the season schedule.
@@ -9,7 +9,7 @@ const fetchSchedule = async function fetchSchedule(opts = {}) {
   } = opts;
 
   const url = `https://cdn.${league}.com/static/json/staticData/scheduleLeagueV2_1.json`;
-  const data = await fetchJson(url);
+  const data = await fetchNbaJson(url);
   if (!data) {
     return undefined;
   }
