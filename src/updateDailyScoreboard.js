@@ -1,9 +1,9 @@
-import fetchDailyScoreboard from './utils/fetch/fetchDailyScoreboard';
-import upload from './utils/aws/upload';
-import log from './utils/log';
-import cacheControl from './utils/cache/cacheControl';
-import { TEN_MINUTES, FIVE_MINUTES, TEN_SECONDS } from './utils/cache/ages';
-import updateTeamRecords from './utils/aws/ddb/updateTeamRecords';
+import fetchDailyScoreboard from './utils/fetch/fetchDailyScoreboard.js';
+import upload from './utils/aws/upload.js';
+import log from './utils/log.js';
+import cacheControl from './utils/cache/cacheControl.js';
+import { TEN_MINUTES, FIVE_MINUTES, TEN_SECONDS } from './utils/cache/ages.js';
+import updateTeamRecords from './utils/aws/ddb/updateTeamRecords.js';
 
 const updateDailyScoreboard = async function updateDailyScoreboard(opts = {}) {
   const {

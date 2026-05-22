@@ -1,4 +1,4 @@
-import fetchNbaJson from './fetchNbaJson';
+import fetchNbaJson from './fetchNbaJson.js';
 
 /**
  * Fetch a live NBA stat for a specific game.

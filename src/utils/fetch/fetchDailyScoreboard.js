@@ -1,5 +1,5 @@
-import { leagues } from '../leagues';
-import fetchNbaJson from './fetchNbaJson';
+import { leagues } from '../leagues.js';
+import fetchNbaJson from './fetchNbaJson.js';
 
 /**
  * Fetch today's league scoreboard.

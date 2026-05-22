@@ -1,7 +1,7 @@
-import fetchSchedule from './utils/fetch/fetchSchedule';
-import upload from './utils/aws/upload';
-import { TEN_MINUTES } from './utils/cache/ages';
-import cacheControl from './utils/cache/cacheControl';
+import fetchSchedule from './utils/fetch/fetchSchedule.js';
+import upload from './utils/aws/upload.js';
+import { TEN_MINUTES } from './utils/cache/ages.js';
+import cacheControl from './utils/cache/cacheControl.js';
 
 const updateSchedule = async function updateSchedule(opts = {}) {
   const {

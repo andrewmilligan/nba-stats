@@ -1,8 +1,8 @@
 import { S3Client, PutObjectCommand } from '@aws-sdk/client-s3';
 
-import log from '../log';
-import getCacheControl from '../cache/cacheControl';
-import purge from './purge';
+import log from '../log.js';
+import getCacheControl from '../cache/cacheControl.js';
+import purge from './purge.js';
 
 const {
   AWS_S3_BUCKET,

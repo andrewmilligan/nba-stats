@@ -1,4 +1,4 @@
-import fetchJson from './fetchJson';
+import fetchJson from './fetchJson.js';
 
 const fetchNbaJson = async function fetchNbaJson(url, opts = {}) {
   const { headers = {} } = opts;

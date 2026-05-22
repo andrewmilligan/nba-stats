@@ -1,4 +1,4 @@
-import fetchNbaLiveStat from './fetchNbaLiveStat';
+import fetchNbaLiveStat from './fetchNbaLiveStat.js';
 
 /**
  * Fetch the box score for a specific game.

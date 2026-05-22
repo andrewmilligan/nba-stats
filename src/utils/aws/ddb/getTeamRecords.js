@@ -1,5 +1,5 @@
-import getDocument from './getDocument';
-import { TEAM_RECORDS, CURRENT_SEASON } from './keys';
+import getDocument from './getDocument.js';
+import { TEAM_RECORDS, CURRENT_SEASON } from './keys.js';
 
 const getTeamRecords = async function getTeamRecords() {
   const records = await getDocument({

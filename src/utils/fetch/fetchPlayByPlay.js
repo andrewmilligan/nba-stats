@@ -1,4 +1,4 @@
-import fetchNbaLiveStat from './fetchNbaLiveStat';
+import fetchNbaLiveStat from './fetchNbaLiveStat.js';
 
 /**
  * Fetch the play-by-play actions for a specific game.

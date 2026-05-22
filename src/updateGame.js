@@ -1,8 +1,8 @@
-import fetchBoxScore from './utils/fetch/fetchBoxScore';
-import fetchPlayByPlay from './utils/fetch/fetchPlayByPlay';
-import upload from './utils/aws/upload';
-import { TEN_MINUTES, TEN_SECONDS } from './utils/cache/ages';
-import cacheControl from './utils/cache/cacheControl';
+import fetchBoxScore from './utils/fetch/fetchBoxScore.js';
+import fetchPlayByPlay from './utils/fetch/fetchPlayByPlay.js';
+import upload from './utils/aws/upload.js';
+import { TEN_MINUTES, TEN_SECONDS } from './utils/cache/ages.js';
+import cacheControl from './utils/cache/cacheControl.js';
 
 /**
  * Update stats for a game by ID.

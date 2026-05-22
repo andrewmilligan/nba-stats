@@ -1,7 +1,7 @@
 import inquirer from 'inquirer';
 
-import fetchDailyLineups from './fetchDailyLineups';
-import fetchPlayByPlay from './fetchPlayByPlay';
+import fetchDailyLineups from './fetchDailyLineups.js';
+import fetchPlayByPlay from './fetchPlayByPlay.js';
 
 const watchGame = async function watchGame() {
   const { date } = await inquirer.prompt([

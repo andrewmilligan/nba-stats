@@ -1,6 +1,6 @@
-import updateDocument from './updateDocument';
-import putDocument from './putDocument';
-import { TEAM_RECORDS, CURRENT_SEASON } from './keys';
+import updateDocument from './updateDocument.js';
+import putDocument from './putDocument.js';
+import { TEAM_RECORDS, CURRENT_SEASON } from './keys.js';
 
 const updateTeamRecords = async function updateTeamRecords({
   teams = [],

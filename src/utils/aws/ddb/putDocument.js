@@ -1,6 +1,6 @@
 import { PutCommand } from '@aws-sdk/lib-dynamodb';
-import ddbDocClient from './ddbDocClient';
-import ddbParams from './params';
+import ddbDocClient from './ddbDocClient.js';
+import ddbParams from './params.js';
 
 const putDocument = async function putDocument(doc) {
   const params = {

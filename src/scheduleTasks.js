@@ -1,15 +1,15 @@
 /* eslint-disable import/prefer-default-export */
-import crypto from './utils/crypto';
-import updateDailyScoreboard from './updateDailyScoreboard';
-import queueMessages from './utils/aws/queueMessages';
-import log from './utils/log';
+import crypto from './utils/crypto.js';
+import updateDailyScoreboard from './updateDailyScoreboard.js';
+import queueMessages from './utils/aws/queueMessages.js';
+import log from './utils/log.js';
 import {
   UPDATE_SCHEDULE,
   UPDATE_DAILY_SCOREBOARD,
   UPDATE_GAME,
-} from './utils/tasks/types';
-import { leagues } from './utils/leagues';
-import getGamesToUpdate from './utils/getGamesToUpdate';
+} from './utils/tasks/types.js';
+import { leagues } from './utils/leagues.js';
+import getGamesToUpdate from './utils/getGamesToUpdate.js';
 
 const {
   SCHEDULE_RATE_MINUTES = '10',

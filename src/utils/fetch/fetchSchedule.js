@@ -1,4 +1,4 @@
-import fetchNbaJson from './fetchNbaJson';
+import fetchNbaJson from './fetchNbaJson.js';
 
 /**
  * Fetch the season schedule.

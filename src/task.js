@@ -1,14 +1,14 @@
 /* eslint-disable import/prefer-default-export */
-import crypto from './utils/crypto';
-import updateGame from './updateGame';
-import updateDailyScoreboard from './updateDailyScoreboard';
-import updateSchedule from './updateSchedule';
-import log from './utils/log';
+import crypto from './utils/crypto.js';
+import updateGame from './updateGame.js';
+import updateDailyScoreboard from './updateDailyScoreboard.js';
+import updateSchedule from './updateSchedule.js';
+import log from './utils/log.js';
 import {
   UPDATE_SCHEDULE,
   UPDATE_DAILY_SCOREBOARD,
   UPDATE_GAME,
-} from './utils/tasks/types';
+} from './utils/tasks/types.js';
 
 export { crypto };
 

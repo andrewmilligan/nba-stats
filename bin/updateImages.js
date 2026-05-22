@@ -2,7 +2,7 @@
 /* eslint-disable no-console */
 import unfetch from 'isomorphic-unfetch';
 import cheerio from 'cheerio';
-import upload from '../src/utils/aws/upload';
+import upload from '../src/utils/aws/upload.js';
 
 async function getNextData(url) {
   const rsp = await unfetch(url);
@@ -15,7 +15,7 @@ async function getNextData(url) {
 async function getWNBA() {
   const url = 'https://www.wnba.com/players';
   const nextData = await getNextData(url);
-  const players = nextData.props.pageProps.allPlayersData;
+  const players = nextData.props.pageProps.currentPlayersData;
   const playerIds = new Set();
   const teamIds = new Set();
   players.forEach((player) => {
@@ -44,6 +44,11 @@ async function getNBA() {
   };
 }
 
+async function fetchImage(url) {
+  const img = await unfetch(url);
+  return img;
+}
+
 async function main() {
   console.log('Fetching player and team data for NBA and WNBA');
   const [nba, wnba] = await Promise.all([
@@ -68,8 +73,10 @@ async function main() {
     }
     await Promise.all(['L', 'D'].map(async (type) => {
       const url = `https://cdn.${league}.com/logos/${league}/${id}/primary/${type}/logo.svg`;
-      const img = await unfetch(url);
-      if (!img.status !== 200) {
+      const img = await fetchImage(url);
+      if (img.status !== 200) {
+        console.error('Unable to fetch team logo:', url);
+        console.log(img);
         return;
       }
       const content = await img.arrayBuffer();
@@ -89,8 +96,9 @@ async function main() {
       await promise;
     }
     const url = `https://cdn.${league}.com/headshots/${league}/latest/260x190/${id}.png`;
-    const img = await unfetch(url);
-    if (!img.status !== 200) {
+    const img = await fetchImage(url);
+    if (img.status !== 200) {
+      console.error('Unable to fetch player headshot:', url);
       return;
     }
     const content = await img.arrayBuffer();

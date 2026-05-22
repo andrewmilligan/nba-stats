@@ -1,4 +1,4 @@
-import { leaguesById } from './leagues';
+import { leaguesById } from './leagues.js';
 
 const getGamesToUpdate = function getGamesToUpdate(
   scoreboards = [],

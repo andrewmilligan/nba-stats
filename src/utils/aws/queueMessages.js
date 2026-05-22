@@ -1,6 +1,6 @@
 import { SQSClient, SendMessageBatchCommand } from '@aws-sdk/client-sqs';
 import { v4 as uuidv4 } from 'uuid';
-import log from '../log';
+import log from '../log.js';
 
 const {
   AWS_SQS_URL,
