@@ -1,6 +1,6 @@
-import fetchSchedule from '../src/utils/fetch/fetchSchedule';
-import fetchBoxScore from '../src/utils/fetch/fetchBoxScore';
-import upload from '../src/utils/aws/upload';
+import fetchSchedule from '../src/utils/fetch/fetchSchedule.js';
+import fetchBoxScore from '../src/utils/fetch/fetchBoxScore.js';
+import upload from '../src/utils/aws/upload.js';
 
 const main = async () => {
   console.log('Fetching NBA schedule');

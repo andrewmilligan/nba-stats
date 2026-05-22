@@ -1,3 +1,3 @@
-import watchGame from '../src/watchGame';
+import watchGame from '../src/watchGame.js';
 
 watchGame();

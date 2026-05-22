@@ -1,5 +1,5 @@
-import updateDailyScoreboard from '../src/updateDailyScoreboard';
-import updateGame from '../src/updateGame';
+import updateDailyScoreboard from '../src/updateDailyScoreboard.js';
+import updateGame from '../src/updateGame.js';
 
 const main = async () => {
   const scoreboard = await updateDailyScoreboard();

@@ -1,5 +1,5 @@
 /* eslint-disable import/no-extraneous-dependencies, no-console */
-import updateGame from '../src/updateGame';
+import updateGame from '../src/updateGame.js';
 
 const { gameId, league } = require('yargs')
   .options({
